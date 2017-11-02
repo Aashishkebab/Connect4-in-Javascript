@@ -1,0 +1,23 @@
+header{
+	font-size: 23pt;
+	font-family: GROBOLD;
+}
+
+body{
+	background-image: url('backaby.jpg');
+	background-size:cover;
+	color:white;
+	cursor: crosshair;
+	font-family: GROBOLD;
+	font-size:17pt;
+}
+
+@font-face{
+	font-family: GROBOLD;
+	src: url('GROBOLD.ttf');
+}
+
+::selection{
+	background-color: transparent;
+	color: #ffffff;
+}

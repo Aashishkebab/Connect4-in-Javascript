@@ -1,0 +1,1626 @@
+<html>
+	<head>
+		<title>Connect 4</title>
+
+		<link rel="shortcut icon" type="image/png" href="favicon.png"></link>
+
+		<link type="text/css" rel="stylesheet" href="bukboiibruh.css"></link>
+
+		<audio id="background_music" autoplay loop>
+			<source src="Decisions.mp3"></source>
+		</audio>
+	</head>
+
+	<header><h1><u>Connect Four</u></h1></header>
+	<!-- <h2><i>No diagonals are computed</i></h2> -->
+
+	<body>
+
+		<a href="help.html" target="_blank"> <img id="YUNoKnoWat2Do" onmouseover="document.getElementById('YUNoKnoWat2Do').src='HelpIGot.png'" onmouseout="document.getElementById('YUNoKnoWat2Do').src='INeedHelp.png'" alt="Click for help" src="INeedHelp.png" style="position:absolute; top:231px; left:51px; height:222px;"></img> </a>
+
+		<img id="aniy" src="trans.png" src="trans.png" style="position:absolute; left:439px; top:117px; width:173px; "></img>
+
+
+		<img id="p1" src="trans.png" style="position:absolute; left:439px; top:117px; width:173px;"></img>
+
+		<img id="p2" src="trans.png" style="position:absolute; left:512px; top:117px; width:173px;"></img>
+
+		<img id="p3" src="trans.png" style="position:absolute; left:585px; top:117px; width:173px;"></img>
+
+		<img id="p4" src="trans.png" style="position:absolute; left:658px; top:117px; width:173px;"></img>
+
+		<img id="p5" src="trans.png" style="position:absolute; left:731px; top:117px; width:173px;"></img>
+
+		<img id="p6" src="trans.png" style="position:absolute; left:801px; top:117px; width:173px;"></img>
+
+		<img id="p7" src="trans.png" style="position:absolute; left:875px; top:117px; width:173px;"></img>
+
+
+		<img id="scoreo" src="scoreboard.png" style="position:absolute; left:1050px; top:11px; width:333px;"></img>
+
+
+
+		<audio id="redo">
+			<source src="framered2.mp3"></source>
+		</audio>
+		<audio id="yelo">
+			<source src="frameyellow2.mp3"></source>
+		</audio>
+
+		<audio id="boom">
+			<source src="hit2.mp3"></source>
+		</audio>
+
+		<audio id="redwon">
+			<source src="cheer1.mp3"></source>
+		</audio>
+		<audio id="yellowon">
+			<source src="cheer3.mp3"></source>
+		</audio>
+
+		<audio id="gamedone">
+			<source src="clearout.mp3"></source>
+		</audio>
+
+		<audio id="colmfull">
+			<source src="colfull.wav"></source>
+		</audio>
+		<audio id="noplace">
+			<source src="boardfull.wav"></source>
+		</audio>
+
+
+		<!-- Columns in pixels from left (just piece): 463, 536, 608, 680, 752, 824, 896 -->
+
+		<!-- Rows in pixels from top (just piece): 602, 13.9, 22, 30.6, 38.8, 47 -->
+
+		<!-- Drop size: 4% -->
+
+		<!-- Hand size: 15% -->
+
+		<!--Hand locations: Left minus 30px -->
+
+	<!--
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-76154444-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	-->
+
+<script>
+
+	/* Code to alert Internet Explorer useres of incompatibility */
+	if (navigator.appVersion.indexOf('Trident') > 0){
+		alert("Internet Explorer does not work well with our game. Animations do not work, and pieces sometimes appear in random places. Let me repeat that: Animations do not work.                                                                                                                                                                                                                                       ANIMATIONS DO NOT WORK!                                                                                                                                                                                                         We recommend another browser.");
+	}
+	/* End Internet Explorer alert */
+
+	var curclR = "yellow";
+	var locaTe;
+	var derop;
+	var colrow = [0, 0, 0, 0, 0, 0, 0];
+	var levle;
+	var rowlm1 = [0, 0, 0, 0, 0, 0, 0];
+	var colm1 = [0, 0, 0, 0, 0, 0];
+	var rowlm2 = [0, 0, 0, 0, 0, 0, 0];
+	var colm2 = [0, 0, 0, 0, 0, 0];
+	var rowlm3 = [0, 0, 0, 0, 0, 0, 0];
+	var colm3 = [0, 0, 0, 0, 0, 0];
+	var rowlm4 = [0, 0, 0, 0, 0, 0, 0];
+	var colm4 = [0, 0, 0, 0, 0, 0];
+	var rowlm5 = [0, 0, 0, 0, 0, 0, 0];
+	var colm5 = [0, 0, 0, 0, 0, 0];
+	var rowlm6 = [0, 0, 0, 0, 0, 0, 0];
+	var colm6 = [0, 0, 0, 0, 0, 0];
+	var colm7 = [0, 0, 0, 0, 0, 0];
+	var rowy;
+	var numer;
+	var repet;
+	var placu;
+	var strpla;
+	var strt;
+	var enod;
+	var moveOn;
+	var posit;
+	var strto;
+	var enodo;
+	var frmLft;
+	var repetos;
+	var repetosio = -10;
+	var plzno = 3.14;
+	var redwin;
+	var yellowin;
+	var coutner;
+	var stolpo;
+	var levlel;
+	var reste;
+	var restet;
+	var WatU_Do = document.getElementById("colmfull");
+	var ohnoes = document.getElementById("noplace");
+	var redt = document.getElementById("redo");
+	var yellowt = document.getElementById('yelo');
+	var bash = document.getElementById('boom');
+	var yelyay = document.getElementById('yellowon');
+	var redyay = document.getElementById('redwon');
+	var donedon = document.getElementById('gamedone');
+	var handy = 439;
+	var handpos;
+	var strhand;
+	var handstile;
+	var begstyle;
+	var endstyle;
+	var RowCheck;
+	var ColumnCheck;
+	var WchichcWay;
+	var StreamGo;
+	var stRepet;
+	var howmanyRed = 0;
+	var howmanyYellow = 0;
+	var boardfull;
+	var iSBoardfuLl;
+	var siZeMan;
+	var FallfromHeaven = 0;
+	var actualMove = 0;
+	var leFtMan = 1;
+	var tOpMan = 1;
+	var howfarMove;
+	var howLeft;
+	var howTop;
+	var gonee;
+	var gonet;
+	var awaiy;
+	var towurds;
+	var scohoriz;
+	var scovert;
+	var accelerant;
+	var plaYed;
+	var anmating;
+	var TimesPlayada = 0.8;
+
+	function colOry(){ //Show hand over where you hover mouse
+		plzno = 23;
+
+		if(curclR == "red"){
+			document.getElementById('aniy').src = 'red.png';
+		}
+		if(curclR == "yellow"){
+			document.getElementById('aniy').src = 'yellow.png';
+		}
+		if(plaYed == 1){
+			document.getElementById('aniy').src = 'hando.png';
+		}
+
+		handstile = document.getElementById(numer).getAttribute('style');
+		strhand = handstile.indexOf('left:');
+		begstyle = strhand + 5;
+		endstyle = strhand + 8;
+		handpos = handstile.slice(begstyle, endstyle);
+
+		/* Code to exempt Internet Explorer from animations */
+		if(navigator.appVersion.indexOf('Trident') > 0){
+			document.getElementById('aniy').src = 'trans.png';
+			if(curclR == "red"){
+				document.getElementById(numer).src='red.png';
+			}
+			if(curclR == "yellow"){
+				document.getElementById(numer).src='yellow.png';
+			}
+			return JohnnyJonJon();
+		}
+		/* End Internet Explorer exemption code */
+
+		if(handpos > handy){
+			return RyanimateRight();
+		}
+		if(handpos < handy){
+			return RyanimateLeft();
+		}
+
+		//Hand Animations
+		function RyanimateRight(){
+				anmating = 1;
+
+				handy = handy + 1.5;
+				if(handy > handpos){
+					anmating = 0;
+					return JohnnyJonJon();
+				}
+				document.getElementById('aniy').style.left = handy + "px";
+
+
+				setTimeout(RyanimateRight, 1);
+		}
+
+		function RyanimateLeft(){
+				anmating = 1;
+
+				handy = handy - 1.5;
+				if(handy < handpos){
+					anmating = 0;
+					return JohnnyJonJon();
+				}
+				document.getElementById('aniy').style.left = handy + "px";
+
+
+				setTimeout(RyanimateLeft, 1);
+		}
+
+	}
+
+	function JohnnyJonJon(){/*Blank function that is called when we need to break from a loop or stop code execution*/}
+
+
+	function dRop(){ //Piece has been dropped
+		if(plzno == 3.14){
+			return JohnnyJonJon();
+		}
+
+		if(anmating == 1){
+			return JohnnyJonJon();
+		}
+
+		plzno = 3.14;
+		anmating = 0; //Whether it's currently animating a piece, 0 is true
+		plaYed = 1; //Whether someone has clicked and played a piece
+
+		levle = colrow[locaTe] + 1; //What level the piece should fall on
+		colrow[locaTe] = levle; //Set the location for the column and row, 'locaTe' is column number, and 'levle' is how high in that column
+
+		if(levle > 6){ //If there is no more space
+			WatU_Do.play();
+
+			//Reset turn to ensure that the turn isn't switched to the next player
+			if(curclR == "yellow"){
+				document.getElementById(numer).src = 'yellow.png';
+			}
+			else if(curclR == 'red'){
+				document.getElementById(numer).src = "red.png";
+			}
+
+			alert("The column that you are attempting to drop your Connect 4 piece in is currently completely occupied. Please move your cursor over a different column to place your piece in.");
+
+			plzno = 2.17;
+			plaYed = 0;
+
+			return JohnnyJonJon();
+		}
+
+
+			/* The following is code to determine the location of the place the piece will be dropped. */
+
+			rowy = levle * 10;
+			derop = rowy + locaTe + 1;
+
+			if(plzno != 2.17){ //If column is not full, then proceed.
+				document.getElementById('aniy').src='hando.png';
+				document.getElementById(numer).src='hando.png';
+
+				//Sound effects
+				if(curclR == "yellow"){
+					yellowt.play();
+				}
+				else if(curclR == "red"){
+					redt.play();
+				}
+
+				/* Internet Explorer exemption */
+				if (navigator.appVersion.indexOf('Trident') > 0){
+					if(curclR == "yellow"){
+						document.getElementById(numer).src='red.png';
+					}
+					else if(curclR == "red"){
+						document.getElementById(numer).src='yellow.png';
+					}
+						document.getElementById('aniy').src="trans.png";
+				}
+				/* End Internet Explorer exemption */
+			}
+
+			plzno = 3.14;
+
+		/* Start code for falling */
+
+		/* Start code for obtaining positions */
+
+			//Get location from HTML element
+			placu = document.getElementById(derop).getAttribute("style");
+			strpla = placu.indexOf("top");
+			posit = placu.indexOf("left");
+			strto = posit + 5;
+			enodo = posit + 10;
+			strt = strpla + 4;
+			enod = strpla + 7;
+
+			if(FallfromHeaven == 0){
+				moveOn = placu.slice(strt , enod);
+				frmLft = placu.slice(strto , enodo);
+			}
+			else{ //If greater than first round, then use workaround to ensure that the location in the HTML element is read correctly, due to a weird bug
+				moveOn = placu.slice(strt , (enod + 1));
+				frmLft = placu.slice(strto , (enodo + 1));
+			}
+
+			repet = 243;
+			repetos = -1.6;
+			document.getElementById("fall").style.left = frmLft;
+
+		/* End code for obtaining positions */
+
+		/*Use arrays to state which piece is where, by column AND by row*/
+			levlel = levle - 1;
+			if(curclR == "yellow"){
+				document.getElementById('fall').src = "yellow_drop.png";
+				if(locaTe == 0){
+					colm1[(levlel)] = 2;
+				}
+				if(locaTe == 1){
+					colm2[(levlel)] = 2;
+				}
+				if(locaTe == 2){
+					colm3[(levlel)] = 2;
+				}
+				if(locaTe == 3){
+					colm4[(levlel)] = 2;
+				}
+				if(locaTe == 4){
+					colm5[(levlel)] = 2;
+				}
+				if(locaTe == 5){
+					colm6[(levlel)] = 2;
+				}
+				if(locaTe == 6){
+					colm7[(levlel)] = 2;
+				}
+				if(levle == 1){
+					rowlm1[(locaTe)] = 2;
+				}
+				if(levle == 2){
+					rowlm2[(locaTe)] = 2;
+				}
+				if(levle == 3){
+					rowlm3[(locaTe)] = 2;
+				}
+				if(levle == 4){
+					rowlm4[(locaTe)] = 2;
+				}
+				if(levle == 5){
+					rowlm5[(locaTe)] = 2;
+				}
+				if(levle == 6){
+					rowlm6[(locaTe)] = 2;
+				}
+				curclR = "red";
+			}
+			else if(curclR == "red"){
+				document.getElementById('fall').src = 'red_drop.png';
+				if(locaTe == 0){
+					colm1[(levlel)] = 1;
+				}
+				if(locaTe == 1){
+					colm2[(levlel)] = 1;
+				}
+				if(locaTe == 2){
+					colm3[(levlel)] = 1;
+				}
+				if(locaTe == 3){
+					colm4[(levlel)] = 1;
+				}
+				if(locaTe == 4){
+					colm5[(levlel)] = 1;
+				}
+				if(locaTe == 5){
+					colm6[(levlel)] = 1;
+				}
+				if(locaTe == 6){
+					colm7[(levlel)] = 1;
+				}
+				if(levle == 1){
+					rowlm1[(locaTe)] = 1;
+				}
+				if(levle == 2){
+					rowlm2[(locaTe)] = 1;
+				}
+				if(levle == 3){
+					rowlm3[(locaTe)] = 1;
+				}
+				if(levle == 4){
+					rowlm4[(locaTe)] = 1;
+				}
+				if(levle == 5){
+					rowlm5[(locaTe)] = 1;
+				}
+				if(levle == 6){
+					rowlm6[(locaTe)] = 1;
+				}
+				curclR = "yellow";
+			}
+			/*End code to state where which piece is*/
+
+			/*Internet Explorer exemption*/
+			if(navigator.appVersion.indexOf('Trident') > 0){
+				return showPiece();
+			}
+			/*End stupid Internet Explorer crap*/
+
+			repetos = -1.8;
+			repet = 243;
+			return aniMate();
+			function aniMate(){ //Animate piece falling down
+				plaYed = 1;
+				anmating = 0;
+
+				plzno = 3.14;
+				repetos = repetos + 1.9; //Add gravity and make the piece accelerate
+			//	repetos = repetos + (repetos/11);
+				repet = repet + Math.floor(repetos); //Piece falling
+
+				if(repet >= moveOn){ //If piece is done falling
+					repetosio = -17;
+					repet = moveOn - 13;
+					bash.play();
+					return BouncyHouse();
+				}
+				document.getElementById('fall').style.top = repet + "px";
+				setTimeout(aniMate, 17);
+			}
+
+			// Bounce the piece
+			function BouncyHouse(){ //Bounce piece up and back down for realism
+				plzno = 3.14;
+				document.getElementById('fall').style.top = repet + "px";
+				repetosio = repetosio + 1.5;
+				repet = repet + Math.floor(repetosio);
+
+				if(repet > moveOn){ //Done bouncing
+					return showPiece();
+				}
+
+				setTimeout(BouncyHouse, 17);
+			}
+
+
+			/* End code for falling */
+
+
+			function showPiece(){ //Show the piece in the exact correct location after animations are done
+				plzno = 3.14;
+				plaYed = 0; //The turn is over
+
+				if(curclR == "yellow"){
+					document.getElementById('aniy').src='yellow.png';
+					document.getElementById(derop).src = 'red_drop.png';
+					if(anmating != 1){
+						document.getElementById(numer).src = 'yellow.png';
+					}
+				}
+				else if(curclR == "red"){
+					document.getElementById('aniy').src='red.png';
+					document.getElementById(derop).src = 'yellow_drop.png';
+					if(anmating != 1){
+						document.getElementById(numer).src = 'red.png';
+					}
+				}
+
+				document.getElementById('fall').src = "trans.png";
+
+				bash.play(); //Sound effect
+
+				accelerant = 0.2;
+				howfarMove = 0;
+
+				document.getElementById('p1').src="trans.png";
+				document.getElementById('p2').src="trans.png";
+				document.getElementById('p3').src="trans.png";
+				document.getElementById('p4').src="trans.png";
+				document.getElementById('p5').src="trans.png";
+				document.getElementById('p6').src="trans.png";
+				document.getElementById('p7').src="trans.png";
+
+				return findWin();
+			}
+
+
+
+			function findWin(){ //Who won, if anyone did?
+				plzno = 3.14;
+
+				/* Check each row */
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 7){
+					stolpo = rowlm1[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 7){
+					stolpo = rowlm2[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 7){
+					stolpo = rowlm3[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 7){
+					stolpo = rowlm4[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 7){
+					stolpo = rowlm5[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 7){
+					stolpo = rowlm6[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+
+
+
+				/* Check each column */
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm1[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm2[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm3[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm4[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm5[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm6[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+				yellowin = 0;
+				redwin = 0;
+				coutner = 0;
+				while(coutner < 8){
+					stolpo = colm7[coutner];
+					coutner = coutner + 1;
+					if(stolpo == 2){
+						yellowin = yellowin + 1;
+						redwin = 0;
+					}
+					if(yellowin == 4){
+						return yelWin();
+					}
+					if(stolpo == 1){
+						redwin = redwin + 1;
+						yellowin = 0;
+					}
+					if(redwin == 4){
+						return redWins();
+					}
+					if(stolpo == 0){
+						yellowin = 0;
+						redwin = 0
+					}
+				}
+
+				/* Check Diagonals */
+					// right
+					yellowin = 0;
+					redwin = 0;
+					RowCheck = 0;
+					ColumnCheck = 1;
+
+					for(coutner = 0; coutner < 99; coutner++){
+
+						if(RowCheck > 5){
+							RowCheck = 0;
+							redwin = 0;
+							yellowin = 0;
+						}
+						if(ColumnCheck > 7){
+							ColumnCheck = 1;
+							redwin = 0;
+							yellowin = 0;
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 1){
+							stolpo = colm1[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 1){
+							stolpo = colm1[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 1){
+							stolpo = colm1[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 1){
+							stolpo = colm1[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 1){
+							stolpo = colm1[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 1){
+							stolpo = colm1[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 2){
+							stolpo = colm2[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 2){
+							stolpo = colm2[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 2){
+							stolpo = colm2[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 2){
+							stolpo = colm2[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 2){
+							stolpo = colm2[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 2){
+							stolpo = colm2[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 3){
+							stolpo = colm3[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 3){
+							stolpo = colm3[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 3){
+							stolpo = colm3[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 3){
+							stolpo = colm3[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 3){
+							stolpo = colm3[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 3){
+							stolpo = colm3[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 4){
+							stolpo = colm4[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 4){
+							stolpo = colm4[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 4){
+							stolpo = colm4[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 4){
+							stolpo = colm4[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 4){
+							stolpo = colm4[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 4){
+							stolpo = colm4[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 5){
+							stolpo = colm5[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 5){
+							stolpo = colm5[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 5){
+							stolpo = colm5[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 5){
+							stolpo = colm5[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 5){
+							stolpo = colm5[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 5){
+							stolpo = colm5[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 6){
+							stolpo = colm6[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 6){
+							stolpo = colm6[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 6){
+							stolpo = colm6[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 6){
+							stolpo = colm6[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 6){
+							stolpo = colm6[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 6){
+							stolpo = colm6[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 7){
+							stolpo = colm7[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 7){
+							stolpo = colm7[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 7){
+							stolpo = colm7[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 7){
+							stolpo = colm7[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 7){
+							stolpo = colm7[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 7){
+							stolpo = colm7[5];
+						}
+
+						if(stolpo == 2){
+							yellowin = yellowin + 1;
+							redwin = 0;
+						}
+						if(yellowin == 4){
+							return yelWin();
+						}
+						if(stolpo == 1){
+							redwin = redwin + 1;
+							yellowin = 0;
+						}
+						if(redwin == 4){
+							return redWins();
+						}
+						if(stolpo == 0){
+							yellowin = 0;
+							redwin = 0
+						}
+
+						RowCheck = RowCheck + 1;
+						ColumnCheck = ColumnCheck + 1;
+					}
+
+					// Left
+					yellowin = 0;
+					redwin = 0;
+					RowCheck = 0;
+					ColumnCheck = 1;
+
+					for(coutner = 0; coutner < 99; coutner++){
+
+						if(RowCheck > 5){
+							RowCheck = 0;
+							redwin = 0;
+							yellowin = 0;
+						}
+						if(ColumnCheck < 1){
+							ColumnCheck = 7;
+							redwin = 0;
+							yellowin = 0;
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 1){
+							stolpo = colm1[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 1){
+							stolpo = colm1[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 1){
+							stolpo = colm1[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 1){
+							stolpo = colm1[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 1){
+							stolpo = colm1[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 1){
+							stolpo = colm1[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 2){
+							stolpo = colm2[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 2){
+							stolpo = colm2[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 2){
+							stolpo = colm2[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 2){
+							stolpo = colm2[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 2){
+							stolpo = colm2[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 2){
+							stolpo = colm2[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 3){
+							stolpo = colm3[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 3){
+							stolpo = colm3[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 3){
+							stolpo = colm3[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 3){
+							stolpo = colm3[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 3){
+							stolpo = colm3[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 3){
+							stolpo = colm3[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 4){
+							stolpo = colm4[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 4){
+							stolpo = colm4[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 4){
+							stolpo = colm4[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 4){
+							stolpo = colm4[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 4){
+							stolpo = colm4[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 4){
+							stolpo = colm4[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 5){
+							stolpo = colm5[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 5){
+							stolpo = colm5[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 5){
+							stolpo = colm5[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 5){
+							stolpo = colm5[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 5){
+							stolpo = colm5[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 5){
+							stolpo = colm5[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 6){
+							stolpo = colm6[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 6){
+							stolpo = colm6[1];
+						}
+
+						if(RowCheck == 2 && ColumnCheck == 6){
+							stolpo = colm6[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 6){
+							stolpo = colm6[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 6){
+							stolpo = colm6[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 6){
+							stolpo = colm6[5];
+						}
+
+						if(RowCheck == 0 && ColumnCheck == 7){
+							stolpo = colm7[0];
+						}
+						if(RowCheck == 1 && ColumnCheck == 7){
+							stolpo = colm7[1];
+						}
+						if(RowCheck == 2 && ColumnCheck == 7){
+							stolpo = colm7[2];
+						}
+						if(RowCheck == 3 && ColumnCheck == 7){
+							stolpo = colm7[3];
+						}
+						if(RowCheck == 4 && ColumnCheck == 7){
+							stolpo = colm7[4];
+						}
+						if(RowCheck == 5 && ColumnCheck == 7){
+							stolpo = colm7[5];
+						}
+
+						if(stolpo == 2){
+							yellowin = yellowin + 1;
+							redwin = 0;
+						}
+						if(yellowin == 4){
+							return yelWin();
+						}
+						if(stolpo == 1){
+							redwin = redwin + 1;
+							yellowin = 0;
+						}
+						if(redwin == 4){
+							return redWins();
+						}
+						if(stolpo == 0){
+							yellowin = 0;
+							redwin = 0
+						}
+
+						RowCheck = RowCheck + 1;
+						ColumnCheck = ColumnCheck - 1;
+					}
+
+					iSBoardfuLl = 0;
+					for(boardfull = 0; boardfull < 7; boardfull = boardfull + 1){
+						if(rowlm6[boardfull] > 0){
+							iSBoardfuLl = iSBoardfuLl + 1;
+						}
+					}
+					if(iSBoardfuLl > 6){
+						ohnoes.play();
+						alert('Oh no no no no no. This game is a tie. There are no more spaces to go in. The game will now restart from the beginning.');
+						donedon.play();
+						watchange = "NobodyWon";
+						return gongunGonnyGONe();
+					}
+
+				siZeMan = 53;
+				plzno = 77;
+			}
+
+
+			function redWins(){
+				redyay.play();
+				alert("Red won");
+				howmanyRed = howmanyRed + 1;
+				watchange = "red";
+				donedon.play();
+				return gongunGonnyGONe();
+			}
+			function yelWin(){
+				yelyay.play();
+				alert("Black won");
+				howmanyYellow = howmanyYellow + 1;
+				watchange = 'yellow';
+				donedon.play();
+				return gongunGonnyGONe();
+			}
+
+			//Animate pieces disappearing
+			function gongunGonnyGONe(){
+				plzno = 3.14;
+
+				for(gonet = 1; gonet < 7; gonet = gonet + 1){
+					for(gonee = 1; gonee < 8; gonee = gonee + 1){
+						picid = gonet * 10;
+						picid = picid + gonee;
+						document.getElementById(picid).style.height = Math.floor(siZeMan) + "px";
+						document.getElementById(picid).style.width = Math.floor(siZeMan) + 'px';
+
+						placu = document.getElementById(picid).getAttribute("style");
+						strpla = placu.indexOf("top");
+						posit = placu.indexOf("left");
+						strto = posit + 5;
+						enodo = posit + 8;
+						strt = strpla + 4;
+						enod = strpla + 7;
+						if(FallfromHeaven == 0){
+							howTop = placu.slice(strt , enod);
+							howLeft = placu.slice(strto , enodo);
+						}
+						else{
+							howTop = placu.slice(strt , (enod + 1));
+							howLeft = placu.slice(strto , (enodo + 1));
+						}
+
+						actualMove = actualMove + accelerant;
+						howLeft = Number(howLeft);
+						howTop = Number(howTop);
+						howTop = howTop + (accelerant * 1.4);
+						howLeft = howLeft + (accelerant * 1.4);
+
+						document.getElementById(picid).style.left = Math.floor(howLeft) + "px";
+						document.getElementById(picid).style.top = Math.floor(howTop) + 'px';
+						FallfromHeaven = FallfromHeaven + accelerant;
+					}
+				}
+
+				accelerant = accelerant + 0.1;
+				howfarMove = howfarMove + accelerant;
+
+				siZeMan = siZeMan - (2 * accelerant);
+
+				if(siZeMan <= 1){
+					awaiy = 111;
+					towurds = 1;
+					scohoriz = 1153;
+					if(watchange == 'red'){
+						scovert = 100;
+					}
+					else if(watchange == "yellow"){
+						scovert = 333;
+					}
+					accelerant = 0.05;
+					return reSetEo();
+				}
+				setTimeout(gongunGonnyGONe, 17);
+			}
+
+
+			function scoreGone(){ //Animate score disappearing
+				plzno = 3.14;
+
+				accelerant = (accelerant + 0.03); //Accelerate disappearance speed
+				awaiy = awaiy - accelerant;
+				scohoriz = scohoriz + (0.4 * accelerant);
+				scovert = scovert + (0.77 * accelerant);
+
+				if(watchange == "red"){
+					document.getElementById('redwinning').style.fontSize = Math.floor(awaiy) + 'pt';
+					document.getElementById('redwinning').style.left = Math.floor(scohoriz) + 'px';
+					document.getElementById('redwinning').style.top = Math.floor(scovert) + 'px';
+				}
+				else if(watchange == "yellow"){
+					document.getElementById('yellowinning').style.fontSize = Math.floor(awaiy) + 'pt';
+					document.getElementById('yellowinning').style.left = Math.floor(scohoriz) + 'px';
+					document.getElementById('yellowinning').style.top = Math.floor(scovert) + 'px';
+				}
+				else{
+					alert("The score animation is running, but the score hasn't changed. This is an error.");
+				}
+
+				if(awaiy <= 1){
+					return scoreHere();
+				}
+
+				setTimeout(scoreGone, 3);
+			}
+
+			function scoreHere(){ //Show new score
+				plzno = 3.14;
+
+				document.getElementById('redwinning').innerHTML = howmanyRed;
+				document.getElementById('yellowinning').innerHTML = howmanyYellow;
+
+				if(watchange == "red"){
+					document.getElementById('redwinning').style.fontSize = Math.floor(awaiy) + 'pt';
+					document.getElementById('redwinning').style.left = Math.floor(scohoriz) + 'px';
+					document.getElementById('redwinning').style.top = Math.floor(scovert) + 'px';
+				}
+				else if(watchange == "yellow"){
+					document.getElementById('yellowinning').style.fontSize = Math.floor(awaiy) + 'pt';
+					document.getElementById('yellowinning').style.left = Math.floor(scohoriz) + 'px';
+					document.getElementById('yellowinning').style.top = Math.floor(scovert) + 'px';
+				}
+				else{
+					alert("The score animation is running, but the score hasn't changed. This is an error.");
+				}
+
+				if(accelerant <= 0.1){
+					document.getElementById('redwinning').style.fontSize = '111pt';
+					document.getElementById('redwinning').style.left = '1153px';
+					document.getElementById('redwinning').style.top = '100px';
+
+					document.getElementById('yellowinning').style.fontSize = '111pt';
+					document.getElementById('yellowinning').style.left = '1153px';
+					document.getElementById('yellowinning').style.top = '333px';
+
+					document.getElementById('aniy').src = "yellow.png";
+					document.getElementById(numer).src = "yellow.png";
+					plaYed = 0;
+
+					plzno = 3234;
+
+					document.getElementById('p1').src="trans.png";
+					document.getElementById('p2').src="trans.png";
+					document.getElementById('p3').src="trans.png";
+					document.getElementById('p4').src="trans.png";
+					document.getElementById('p5').src="trans.png";
+					document.getElementById('p6').src="trans.png";
+					document.getElementById('p7').src="trans.png";
+
+					return JohnnyJonJon();
+				}
+
+				accelerant = (accelerant - 0.03);
+				awaiy = awaiy + accelerant;
+				scohoriz = scohoriz - (0.37 * accelerant);
+				scovert = scovert - (0.77 * accelerant);
+
+				setTimeout(scoreHere, 3);
+			}
+
+
+
+			function reSetEo(){ //Reset board
+				for(restet = 1; restet < 7; restet = restet + 1){
+					for(reste = 1; reste < 8; reste = reste + 1){
+						picid = restet * 10;
+						picid = picid + reste;
+						document.getElementById(picid).src="trans.png";
+						document.getElementById(picid).style.height="53px";
+						document.getElementById(picid).style.width='53px';
+
+						placu = document.getElementById(picid).getAttribute("style");
+						strpla = placu.indexOf("top");
+						posit = placu.indexOf("left");
+						strto = posit + 5;
+						enodo = posit + 8;
+						strt = strpla + 4;
+						enod = strpla + 7;
+						if(FallfromHeaven == 0){
+							howTop = placu.slice(strt , enod);
+							howLeft = placu.slice(strto , enodo);
+						}
+						else{
+							howTop = placu.slice(strt , (enod + 1));
+							howLeft = placu.slice(strto , (enodo + 1));
+						}
+						actualMove = actualMove + 1;
+						howLeft = Number(howLeft);
+						howTop = Number(howTop);
+						document.getElementById(picid).style.left = (howLeft - (howfarMove - 4)) + 'px';
+						Leap_Year = Math.floor(TimesPlayada);
+						Leap_Year = TimesPlayada / Leap_Year;
+						if(Leap_Year != 1){
+							document.getElementById(picid).style.top = (howTop - (howfarMove - 3)) + 'px';
+						}else{
+							document.getElementById(picid).style.top = (howTop - (howfarMove - 4)) + 'px';
+						}
+					}
+				}
+
+				curclR = "yellow";
+				locaTe = 0;
+				colrow = [0, 0, 0, 0, 0, 0, 0];
+				levle = 0;
+				rowlm1 = [0, 0, 0, 0, 0, 0, 0];
+				colm1 = [0, 0, 0, 0, 0, 0];
+				rowlm2 = [0, 0, 0, 0, 0, 0, 0];
+				colm2 = [0, 0, 0, 0, 0, 0];
+				rowlm3 = [0, 0, 0, 0, 0, 0, 0];
+				colm3 = [0, 0, 0, 0, 0, 0];
+				rowlm4 = [0, 0, 0, 0, 0, 0, 0];
+				colm4 = [0, 0, 0, 0, 0, 0];
+				rowlm5 = [0, 0, 0, 0, 0, 0, 0];
+				colm5 = [0, 0, 0, 0, 0, 0];
+				rowlm6 = [0, 0, 0, 0, 0, 0, 0];
+				colm6 = [0, 0, 0, 0, 0, 0];
+				colm7 = [0, 0, 0, 0, 0, 0];
+				rowy = 0;
+				repet = 0;
+				placu = 0;
+				strpla = 0;
+				strt = 0;
+				enod = 0;
+				moveOn = 0;
+				posit = 0;
+				strto = 0;
+				enodo = 0;
+				frmLft = 0;
+				repetos = 0;
+				plzno = 654;
+				redwin = 0;
+				yellowin = 0;
+				coutner = 0;
+				stolpo = 0;
+				levlel = 0;
+				reste = 0;
+				restet = 0;
+				siZeMan = 0;
+				ColumnCheck = 0;
+				WchichcWay = 0;
+				StreamGo = 0;
+				stRepet = 0;
+				boardfull = 0;
+				iSBoardfuLl = 0;
+				actualMove = 0;
+				FallfromHeaven = FallfromHeaven + 1;
+				plaYed = 0;
+				TimesPlayada = TimesPlayada + 1.4;
+
+				document.getElementById('aniy').src = 'yellow.png';
+				document.getElementById(numer).src = "trans.png";
+
+				document.getElementById('p1').src="trans.png";
+				document.getElementById('p2').src="trans.png";
+				document.getElementById('p3').src="trans.png";
+				document.getElementById('p4').src="trans.png";
+				document.getElementById('p5').src="trans.png";
+				document.getElementById('p6').src="trans.png";
+				document.getElementById('p7').src="trans.png";
+
+				if(watchange != "red" && watchange != 'yellow'){
+					return JohnnyJonJon();
+				}
+				else{
+					return scoreGone();
+				}
+			}
+
+	}
+
+
+
+
+
+
+</script>
+
+
+		<!-- Columns in pixels from left (just piece): 463, 536, 608, 680, 752, 824, 896 -->
+
+		<!-- Rows in pixels from top (just piece): 602, 13.9, 22, 30.6, 38.8, 47 -->
+
+		<!-- Drop size: 4% -->
+
+		<!-- Hand size: 15% -->
+
+		<!--Hand locations: Left minus 2% -->
+
+
+
+	<img id="11" src="trans.png" style="position:absolute; width:53px; height:53px; left:463px; top:666px;"></img>
+	<img id="12" src="trans.png" style="position:absolute; width:53px; height:53px; left:536px; top:666px;"></img>
+	<img id="13" src="trans.png" style="position:absolute; width:53px; height:53px; left:608px; top:666px;"></img>
+	<img id="14" src="trans.png" style="position:absolute; width:53px; height:53px; left:680px; top:666px;"></img>
+	<img id="15" src="trans.png" style="position:absolute; width:53px; height:53px; left:752px; top:666px;"></img>
+	<img id="16" src="trans.png" style="position:absolute; width:53px; height:53px; left:824px; top:666px;"></img>
+	<img id="17" src="trans.png" style="position:absolute; width:53px; height:53px; left:896px; top:666px;"></img>
+
+	<img id="21" src="trans.png" style="position:absolute; width:53px; height:53px; left:463px; top:602px;"></img>
+	<img id="22" src="trans.png" style="position:absolute; width:53px; height:53px; left:536px; top:602px;"></img>
+	<img id="23" src="trans.png" style="position:absolute; width:53px; height:53px; left:608px; top:602px;"></img>
+	<img id="24" src="trans.png" style="position:absolute; width:53px; height:53px; left:680px; top:602px;"></img>
+	<img id="25" src="trans.png" style="position:absolute; width:53px; height:53px; left:752px; top:602px;"></img>
+	<img id="26" src="trans.png" style="position:absolute; width:53px; height:53px; left:824px; top:602px;"></img>
+	<img id="27" src="trans.png" style="position:absolute; width:53px; height:53px; left:896px; top:602px;"></img>
+
+	<img id="31" src="trans.png" style="position:absolute; width:53px; height:53px; left:463px; top:538px;"></img>
+	<img id="32" src="trans.png" style="position:absolute; width:53px; height:53px; left:536px; top:538px;"></img>
+	<img id="33" src="trans.png" style="position:absolute; width:53px; height:53px; left:608px; top:538px;"></img>
+	<img id="34" src="trans.png" style="position:absolute; width:53px; height:53px; left:680px; top:538px;"></img>
+	<img id="35" src="trans.png" style="position:absolute; width:53px; height:53px; left:752px; top:538px;"></img>
+	<img id="36" src="trans.png" style="position:absolute; width:53px; height:53px; left:824px; top:538px;"></img>
+	<img id="37" src="trans.png" style="position:absolute; width:53px; height:53px; left:896px; top:538px;"></img>
+
+	<img id="41" src="trans.png" style="position:absolute; width:53px; height:53px; left:463px; top:474px;"></img>
+	<img id="42" src="trans.png" style="position:absolute; width:53px; height:53px; left:536px; top:474px;"></img>
+	<img id="43" src="trans.png" style="position:absolute; width:53px; height:53px; left:608px; top:474px;"></img>
+	<img id="44" src="trans.png" style="position:absolute; width:53px; height:53px; left:680px; top:474px;"></img>
+	<img id="45" src="trans.png" style="position:absolute; width:53px; height:53px; left:752px; top:474px;"></img>
+	<img id="46" src="trans.png" style="position:absolute; width:53px; height:53px; left:824px; top:474px;"></img>
+	<img id="47" src="trans.png" style="position:absolute; width:53px; height:53px; left:896px; top:474px;"></img>
+
+	<img id="51" src="trans.png" style="position:absolute; width:53px; height:53px; left:463px; top:410px;"></img>
+	<img id="52" src="trans.png" style="position:absolute; width:53px; height:53px; left:536px; top:410px;"></img>
+	<img id="53" src="trans.png" style="position:absolute; width:53px; height:53px; left:608px; top:410px;"></img>
+	<img id="54" src="trans.png" style="position:absolute; width:53px; height:53px; left:680px; top:410px;"></img>
+	<img id="55" src="trans.png" style="position:absolute; width:53px; height:53px; left:752px; top:410px;"></img>
+	<img id="56" src="trans.png" style="position:absolute; width:53px; height:53px; left:824px; top:410px;"></img>
+	<img id="57" src="trans.png" style="position:absolute; width:53px; height:53px; left:896px; top:410px;"></img>
+
+	<img id="61" src="trans.png" style="position:absolute; width:53px; height:53px; left:463px; top:346px;"></img>
+	<img id="62" src="trans.png" style="position:absolute; width:53px; height:53px; left:536px; top:346px;"></img>
+	<img id="63" src="trans.png" style="position:absolute; width:53px; height:53px; left:608px; top:346px;"></img>
+	<img id="64" src="trans.png" style="position:absolute; width:53px; height:53px; left:680px; top:346px;"></img>
+	<img id="65" src="trans.png" style="position:absolute; width:53px; height:53px; left:752px; top:346px;"></img>
+	<img id="66" src="trans.png" style="position:absolute; width:53px; height:53px; left:824px; top:346px;"></img>
+	<img id="67" src="trans.png" style="position:absolute; width:53px; height:53px; left:896px; top:346px;"></img>
+
+
+	<img id="fall" src="trans.png" style="position:absolute; width:53px; height:53px; left:1px; top:1px; z-index:-3;"></img>
+
+
+
+	<img src="board.png" style="position:absolute; left:450px; top:337px; width:513px; height:384px;"></img>
+
+
+	<div
+	onmouseover="numer = 'p1'; colOry()"
+	onmouseout="document.getElementById('p1').src='trans.png'"
+	onclick="locaTe = 0; dRop()"
+	style="position:absolute; left:454px; top:111px; width:73px; height:666px;"></div>
+
+	<div
+	onmouseover="numer = 'p2'; colOry();"
+	onmouseout="document.getElementById('p2').src='trans.png'"
+	onclick="locaTe = 1; dRop()"
+	style="position:absolute; left:527px; top:111px; width:73px; height:666px;"></div>
+
+	<div
+	onmouseover="numer = 'p3'; colOry()"
+	onmouseout="document.getElementById('p3').src='trans.png'"
+	onclick="locaTe = 2; dRop()"
+	style="position:absolute; left:599px; top:111px; width:73px; height:666px;"></div>
+
+	<div
+	onmouseover="numer = 'p4'; colOry()"
+	onmouseout="document.getElementById('p4').src='trans.png'"
+	onclick="locaTe = 3; dRop()"
+	style="position:absolute; left:671px; top:111px; width:73px; height:666px;"></div>
+
+	<div
+	onmouseover="numer = 'p5'; colOry()"
+	onmouseout="document.getElementById('p5').src='trans.png'"
+	onclick="locaTe = 4; dRop()"
+	style="position:absolute; left:743px; top:111px; width:73px; height:666px;"></div>
+
+	<div
+	onmouseover="numer = 'p6'; colOry()"
+	onmouseout="document.getElementById('p6').src='trans.png'"
+	onclick="locaTe = 5; dRop()"
+	style="position:absolute; left:815px; top:111px; width:73px; height:666px;"></div>
+
+	<div
+	onmouseover="numer = 'p7'; colOry()"
+	onmouseout="document.getElementById('p7').src='trans.png'"
+	onclick="locaTe = 6; dRop()"
+	style="position:absolute; left:887px; top:111px; width:73px; height:666px;"></div>
+
+
+	<span id="redwinning" style="font-size: 111pt; position:absolute; left:1153px; top:100px;">0</span>
+	<span id="yellowinning" style="font-size: 111pt; position:absolute; left:1153px; top:333px;">0</span>
+
+</html>
